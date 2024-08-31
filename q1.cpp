@@ -1,16 +1,10 @@
-/******************************************************************************
-
-Welcome to GDB Online.
-  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby,
-  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
-  Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
 #include <stdio.h>
 #include <iostream>
 #include<vector>
 using namespace std;
 #include <cmath>
+#include<fstream>
+
 
 int main()
 {
@@ -74,6 +68,18 @@ int main()
 	for(int i=0; i<N; i++) {
 		cout<<"analytical temp at node"<<i+1<<" is "<<T_analytical[i]<<" fdm temp is "<<Temp[i]<<"\n";
 	}
-
+    ofstream myfile("fdmq1sol.txt");
+    
+    if (myfile.is_open()) {
+         
+        for (int i = 0; i < N; i++) {
+            myfile << "Node " << i + 1 << ": Temperature = " << Temp[i] << endl;
+        }
+        myfile.close();
+        cout << "Temperature values have been written to fdmq1sol.txt" << endl;
+    } else {
+        cout << "Error opening file!" << endl;
+    }
+    
 	return 0;
 }
